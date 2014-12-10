@@ -1,5 +1,4 @@
 var AWS = require('aws-sdk'); 
-
 AWS.config.region = 'us-east-1'
 var queueUrl = 'https://sqs.us-east-1.amazonaws.com/854757141155/tictactoe'
 var sqs = new AWS.SQS()
@@ -31,7 +30,7 @@ setInterval(function () {
 
 function HandleMessage(m) {
     var body = JSON.parse(m.Body);
-    var command = require('./' + body.command);
+    var command = require('./handlers/' + body.command);
     command.execute(body.data);
 }
 
